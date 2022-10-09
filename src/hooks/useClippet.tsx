@@ -24,7 +24,7 @@ export default function useClippet(clippet: Clippet, options?: Partial<UseClippe
     volume: clipVolume = DEFAULT_CLIPPET_VOLUME,
     pitch: clipPitch = DEFAULT_PITCH,
   } = options ?? {};
-  const [clip, setClip] = useState(createAudioByClippet(clippet));
+  const [clip, setClip] = useState(getAudioByClippet(clippet));
   const cappedProviderVolume = capValueWithinRange(providerVolume, minVolume, maxVolume);
   const cappedClipVolume = capValueWithinRange(clipVolume, minVolume, maxVolume);
   const cappedMutedVolume = capValueWithinRange(mutedVolume, minVolume, maxVolume);
