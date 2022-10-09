@@ -26,7 +26,7 @@ export const DEFAULT_AUTO_UNMUTE = false;
 /**
  * The default volume level of the provider.
  */
-export const DEFAULT_PROVIDER_VOLUME = 0.5;
+export const DEFAULT_PROVIDER_VOLUME = 1.0;
 
 /**
  * The default volume level of the clippet.
