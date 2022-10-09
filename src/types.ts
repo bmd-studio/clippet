@@ -38,3 +38,7 @@ export type ClippetStop = () => void;
 export interface ClippetAdvancedTuple {
   stop: ClippetStop;
 };
+
+export interface AudioCache {
+  [key: string]: HTMLAudioElement;
+}

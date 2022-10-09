@@ -1,5 +1,7 @@
 import { DEBUG_ENABLED, DEBUG_PREFIX, DEBUG_PREFIX_STYLE } from "./constants";
-import { Clippet } from "./types";
+import { Clippet, AudioCache } from "./types";
+
+const audioCache: AudioCache = {};
 
 /**
  * Helper to cap a value to a certain range.
@@ -24,8 +26,18 @@ import { Clippet } from "./types";
   return value;
 };
 
-export function createAudioByClippet(clippet: Clippet): HTMLAudioElement {
-  return new Audio(clippet.url);
+export function getAudioByClippet(clippet: Clippet): HTMLAudioElement {
+  const { url } = clippet;
+  const isCached = url in audioCache;
+
+  if (isCached) {
+    return audioCache[url];
+  }
+
+  const audio = new Audio(clippet.url);
+  audioCache[url] = audio;
+
+  return audio;
 }
 
 export function debug(...messages: any[]) {

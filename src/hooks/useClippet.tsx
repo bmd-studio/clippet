@@ -6,7 +6,7 @@ import {
   DEFAULT_PITCH,
 } from '../constants';
 import { Clippet, UseClippet, UseClippetAdvancedOptions } from '../types';
-import { capValueWithinRange, createAudioByClippet, debugClippet } from '../utilities';
+import { capValueWithinRange, getAudioByClippet, debugClippet } from '../utilities';
 
 import useClippetProvider from './useClippetProvider';
 
@@ -34,11 +34,13 @@ export default function useClippet(clippet: Clippet, options?: Partial<UseClippe
   const isMuted = providerIsMuted || clipIsMuted
   const volume = isMuted ? cappedMutedVolume : (cappedProviderVolume * cappedClipVolume);
   const pitch = providerPitch * clipPitch;
-  const playIcon = isMuted ? '🔇' : '🔊';
 
   const play = () => {
-    debugClippet(clippet, `${playIcon} Executing play`);
+    const playIcon = isMuted ? '🔇' : '🔊';
+    debugClippet(clippet, `${playIcon} Executing play with volume: `, volume);
+
     reset();
+    clip.volume = volume;
     clip.play();
   };
   const stop = () => {
@@ -49,13 +51,12 @@ export default function useClippet(clippet: Clippet, options?: Partial<UseClippe
   const reset = () => {
     debugClippet(clippet, '🕛 Executing reset');
     clip.currentTime = 0;
-    clip.volume = volume;
   };
 
   // load the audio clip when the audio file changes
   useEffect(() => {
     debugClippet(clippet, '🎛 Handle clippet change');
-    setClip(createAudioByClippet(clippet));
+    setClip(getAudioByClippet(clippet));
   }, [clippet]);
 
   // handle clip changes
@@ -63,12 +64,6 @@ export default function useClippet(clippet: Clippet, options?: Partial<UseClippe
     debugClippet(clippet, '🎛 Handle clip change');
     reset();
   }, [clip]);
-
-  // handle volume changes
-  useEffect(() => {
-    debugClippet(clippet, `${playIcon} Handle volume change to: `, volume);
-    clip.volume = volume;
-  }, [volume, isMuted]);
 
   return [
     play,
