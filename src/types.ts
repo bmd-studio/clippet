@@ -2,7 +2,7 @@
 /**
  * Global settings to adjust behaviour of all Clippet sounds at once using the Context API.
  */
-export interface ClippetContextValue {
+export interface ClippetContextOptions {
 
   /**
    * Flag to identify whether the sounds are globally muted.
@@ -37,7 +37,10 @@ export interface ClippetContextValue {
   pitch: number;
 }
 
-export type ClippetProviderOptions = ClippetContextValue;
+/**
+ * The Clippet provider options that can be passed along to configure the React Context instance.
+ */
+export type ClippetProviderOptions = ClippetContextOptions;
 
 /**
  * Optional options that can be passed to a `useClippet` hook to fine-tune the behaviour.
@@ -75,11 +78,6 @@ export interface UseClippetAdvancedOptions {
 }
 
 /**
- * The `useClippet` hook return tuple.
- */
-export type UseClippet = [ClippetPlay, ClippetAdvancedTuple];
-
-/**
  * The definition of a unique Clippet sound which the `useClippet` hook expects to specify the sound.
  */
 export interface Clippet {
@@ -87,17 +85,39 @@ export interface Clippet {
   url: string;
 }
 
-export type ClippetPlay = () => void;
-export type ClippetStop = () => void;
+/**
+ * The `useClippet` hook return tuple.
+ */
+export type UseClippet = [ClippetPlay, ClippetAdvancedTuple];
+
+/**
+ * API for advancec usage of the `useClippet` hook.
+ */
 export interface ClippetAdvancedTuple {
   stop: ClippetStop;
 };
 
+/**
+ * Function signature of the `play` function of a Clippet.
+ */
+export type ClippetPlay = () => void;
+
+ /**
+  * Function signature of the `stop` function of a Clippet.
+  */
+export type ClippetStop = () => void;
+
+ /**
+  * Data structure of the `Audio` pool.
+  */
+export interface AudioPool {
+  [key: string]: HTMLAudioElement;
+}
+
+/**
+ * Options to be passed along when fetching a pooled `Audio` instance.
+ */
 export interface GetPooledClipOptions {
   clippet: Clippet;
   enablePooling: boolean;
-}
-
-export interface AudioPool {
-  [key: string]: HTMLAudioElement;
 }

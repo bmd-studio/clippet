@@ -1,4 +1,4 @@
-import { ReactNode, useMemo } from 'react';
+import { ReactNode, useState } from 'react';
 
 import {
   DEFAULT_MAX_VOLUME,
@@ -9,14 +9,26 @@ import {
   DEFAULT_PROVIDER_VOLUME,
 } from '../constants';
 import { ClippetProviderOptions } from '../types';
-
 import ClippetContext from './ClippetContext';
 
+/**
+ * Provider properties to set global options affecting all Clippet instances.
+ */
 export interface ClippetProviderProps {
   children?: ReactNode | ReactNode[] | null;
   options?: Partial<ClippetProviderOptions>;
 }
 
+/**
+ * Provider to easily adjust the behaviour and settings of all Clippet instances that are
+ * children of this provider. The provider is usually placed somewhere near the root of the DOM tree.
+ *
+ * Please note that each provider has an individual instance of the React Context, making it easy
+ * to create multiple groups of configurations if such an advanced setup is required.
+ *
+ * @param props properties to configure the global options.
+ * @returns ClippetProvider
+ */
 export default function ClippetProvider(props: ClippetProviderProps) {
   const { children, options } = props;
   const {

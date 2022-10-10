@@ -15,9 +15,10 @@ import useClippetProvider from './useClippetProvider';
  *
  * By default the same sound is re-used across hooks with pooling for performance reasons.
  * This does mean it can only be played one at a time.
+ *
  * @param clippet The Clippet you would like to trigger using this hook.
  * @param options Advanced options to customize the behaviour of this single hook.
- * @returns tuple to play and have access to the advanced API to for example stop the sound on request.
+ * @returns Tuple to play and have access to the advanced API to for example stop the sound on request.
  */
 export default function useClippet(clippet: Clippet, options?: Partial<UseClippetAdvancedOptions>): UseClippet {
   const {
