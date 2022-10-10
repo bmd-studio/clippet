@@ -6,10 +6,19 @@ import {
   DEFAULT_PITCH,
 } from '../constants';
 import { Clippet, UseClippet, UseClippetAdvancedOptions } from '../types';
-import { capValueWithinRange, getAudioByClippet, debugClippet } from '../utilities';
+import { capValueWithinRange, getPooledAudio, debugClippet } from '../utilities';
 
 import useClippetProvider from './useClippetProvider';
 
+/**
+ * Hook to load a Clippet and play it on demand.
+ *
+ * By default the same sound is re-used across hooks with pooling for performance reasons.
+ * This does mean it can only be played one at a time.
+ * @param clippet The Clippet you would like to trigger using this hook.
+ * @param options Advanced options to customize the behaviour of this single hook.
+ * @returns tuple to play and have access to the advanced API to for example stop the sound on request.
+ */
 export default function useClippet(clippet: Clippet, options?: Partial<UseClippetAdvancedOptions>): UseClippet {
   const {
     isMuted: providerIsMuted,
@@ -21,18 +30,26 @@ export default function useClippet(clippet: Clippet, options?: Partial<UseClippe
   } = useClippetProvider();
   const {
     isMuted: clipIsMuted = DEFAULT_MUTED,
+    forceUnmute = false,
     volume: clipVolume = DEFAULT_CLIPPET_VOLUME,
     pitch: clipPitch = DEFAULT_PITCH,
+    enablePooling = true,
   } = options ?? {};
-  const [clip, setClip] = useState(getAudioByClippet(clippet));
+  const pooledAudioOptions = {
+    clippet,
+    enablePooling,
+  };
+  const [audio, setAudio] = useState(getPooledAudio(pooledAudioOptions));
   const cappedProviderVolume = capValueWithinRange(providerVolume, minVolume, maxVolume);
   const cappedClipVolume = capValueWithinRange(clipVolume, minVolume, maxVolume);
   const cappedMutedVolume = capValueWithinRange(mutedVolume, minVolume, maxVolume);
 
   // Merge the provider options with the clip options. Behaviour for each option can be defined here.
   // For example some options require a multiplication operation and other options something else.
-  const isMuted = providerIsMuted || clipIsMuted
+  const isMuted = (providerIsMuted || clipIsMuted) && !forceUnmute;
   const volume = isMuted ? cappedMutedVolume : (cappedProviderVolume * cappedClipVolume);
+
+  // TODO: implement pich using the Web Audio API (HTML5 is not possible?)
   const pitch = providerPitch * clipPitch;
 
   const play = () => {
@@ -40,30 +57,30 @@ export default function useClippet(clippet: Clippet, options?: Partial<UseClippe
     debugClippet(clippet, `${playIcon} Executing play with volume: `, volume);
 
     reset();
-    clip.volume = volume;
-    clip.play();
+    audio.volume = volume;
+    audio.play();
   };
   const stop = () => {
     debugClippet(clippet, '🛑 Executing stop');
-    clip.pause();
+    audio.pause();
     reset();
   }
   const reset = () => {
     debugClippet(clippet, '🕛 Executing reset');
-    clip.currentTime = 0;
+    audio.currentTime = 0;
   };
 
   // load the audio clip when the audio file changes
   useEffect(() => {
     debugClippet(clippet, '🎛 Handle clippet change');
-    setClip(getAudioByClippet(clippet));
+    setAudio(getPooledAudio(pooledAudioOptions));
   }, [clippet]);
 
   // handle clip changes
   useEffect(() => {
     debugClippet(clippet, '🎛 Handle clip change');
     reset();
-  }, [clip]);
+  }, [audio]);
 
   return [
     play,
