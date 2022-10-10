@@ -1,7 +1,11 @@
-import { DEBUG_ENABLED, DEBUG_PREFIX, DEBUG_PREFIX_STYLE } from "./constants";
-import { Clippet, AudioCache } from "./types";
+import {
+  DEBUG_ENABLED,
+  DEBUG_PREFIX,
+  DEBUG_PREFIX_STYLE,
+} from './constants';
+import { Clippet, AudioPool, GetPooledClipOptions } from './types';
 
-const audioCache: AudioCache = {};
+const audioPool: AudioPool = {};
 
 /**
  * Helper to cap a value to a certain range.
@@ -26,16 +30,20 @@ const audioCache: AudioCache = {};
   return value;
 };
 
-export function getAudioByClippet(clippet: Clippet): HTMLAudioElement {
+export function getPooledAudio(options: GetPooledClipOptions): HTMLAudioElement {
+  const { clippet, enablePooling } = options;
   const { url } = clippet;
-  const isCached = url in audioCache;
+  const isPooled = url in audioPool;
 
-  if (isCached) {
-    return audioCache[url];
+  if (enablePooling && isPooled) {
+    return audioPool[url];
   }
 
   const audio = new Audio(clippet.url);
-  audioCache[url] = audio;
+
+  if (enablePooling) {
+    audioPool[url] = audio;
+  }
 
   return audio;
 }
