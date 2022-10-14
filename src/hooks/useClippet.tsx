@@ -5,7 +5,7 @@ import {
   DEFAULT_MUTED,
   DEFAULT_PITCH,
 } from '../constants';
-import { Clippet, UseClippet, UseClippetAdvancedOptions } from '../types';
+import { Clippet, UseClippet, ClippetOptions } from '../types';
 import { capValueWithinRange, getPooledAudio, debugClippet } from '../utilities';
 
 import useClippetProvider from './useClippetProvider';
@@ -20,7 +20,7 @@ import useClippetProvider from './useClippetProvider';
  * @param options Advanced options to customize the behaviour of this single hook.
  * @returns Tuple to play and have access to the advanced API to for example stop the sound on request.
  */
-export default function useClippet(clippet: Clippet, options?: Partial<UseClippetAdvancedOptions>): UseClippet {
+export default function useClippet(clippet: Clippet, options?: Partial<ClippetOptions>): UseClippet {
   const {
     isMuted: providerIsMuted,
     volume: providerVolume,

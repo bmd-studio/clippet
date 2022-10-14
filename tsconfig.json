@@ -1,32 +1,8 @@
 {
+  "extends": "./tsconfig-base.json",
   "compilerOptions": {
-    "target": "es5",
-    "module": "es6",
-    "resolveJsonModule": true,
-    "sourceMap": true,
-    "outDir": "dist",
-    "inlineSources": true,
-    "strict": true,
-    "allowJs": true,
-    "pretty": true,
-    "declaration": true,
-    "importHelpers": false,
-    "experimentalDecorators": true,
-    "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "strictNullChecks": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUnusedParameters": false,
-    "noUnusedLocals": false,
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "strictBindCallApply": false,
-    "jsx": "react-jsx"
-  },
-  "include": ["src/**/*"],
-  "assets":["**/*.ogg"],
-  "exclude": [
-    "**/__tests__/**"
-  ]
+      "module": "esnext",
+      "outDir": "dist/esm",
+      "target": "esnext"
+  }
 }
-
