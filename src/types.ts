@@ -35,7 +35,26 @@ export interface ClippetContextOptions {
    * The global pitch level for all sounds. This pitch level is multiplied with the pitch specific settings of a hook.
    */
   pitch: number;
+
+  /**
+   * Global events on the document for
+   */
+  globalEvents: ClippetGlobalEvent[];
 }
+
+/**
+ * Global event definition to allow for easy
+ */
+export interface ClippetGlobalEvent {
+  clippet: Clippet;
+  clippetOptions: ClippetOptions;
+  selectors: ClippetDocumentSelector[];
+}
+
+/**
+ * The Clippet document selector type to define what the global events can select on.
+ */
+export type ClippetDocumentSelector = string;
 
 /**
  * The Clippet provider options that can be passed along to configure the React Context instance.
@@ -45,7 +64,7 @@ export type ClippetProviderOptions = ClippetContextOptions;
 /**
  * Optional options that can be passed to a `useClippet` hook to fine-tune the behaviour.
  */
-export interface UseClippetAdvancedOptions {
+export interface ClippetOptions {
 
   /**
    * Flag to identify whether the sound of this hook should be muted.

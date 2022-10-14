@@ -25,6 +25,8 @@ export function createClippetContext() {
     mutedVolume: DEFAULT_MUTED_VOLUME,
 
     pitch: DEFAULT_PITCH,
+
+    globalEvents: [],
   });
 }
 

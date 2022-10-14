@@ -52,6 +52,8 @@ export default function ClippetProvider(props: ClippetProviderProps) {
       mutedVolume,
 
       pitch,
+
+      globalEvents: [],
     }}>
       {children}
     </ClippetContext.Provider>
