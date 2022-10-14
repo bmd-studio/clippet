@@ -1,14 +1,10 @@
 import { useState } from 'react';
-import { cPlip, useClippet } from '@clippet/react';
 import reactLogo from './assets/react.svg';
 import './App.css';
+import PlipButton from './PlipButton';
 
 function App() {
   const [count, setCount] = useState(0);
-  const [playPlip] = useClippet(cPlip, {
-    isMuted: false,
-    volume: 1,
-  });
 
   return (
     <div className="App">
@@ -22,12 +18,11 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => {
-          playPlip();
-          setCount((count) => count + 1);
-        }}>
-          count is {count}
-        </button>
+        {(new Array(100).fill(0)).map((_value, index) => {
+          return (
+            <PlipButton key={index}  />
+          );
+        })}
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
