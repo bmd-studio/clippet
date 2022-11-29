@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "setup": "yarn install",
-    "start": "vite",
+    "start": "vite --port=5174",
+    "typecheck": "yarn tsc --watch",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },

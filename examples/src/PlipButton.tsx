@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { useClippet } from '@clippet/react/index';
-import cPlop from '@clippet/react/clips/plop';
+import { clPlop, useClippet } from '@clippet/react';
 
 export default function PlipButton() {
   const [count, setCount] = useState(0);
-  const [playPlop] = useClippet(cPlop, {
+  const [playPlop] = useClippet(clPlop, {
     isMuted: false,
-    volume: 1,
+    volume: 0.5,
   });
 
   return (
