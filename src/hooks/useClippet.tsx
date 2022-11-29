@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import {
   DEFAULT_CLIPPET_VOLUME,
@@ -36,10 +36,12 @@ export function useClippet(clippet: Clippet, options?: Partial<ClippetOptions>):
     pitch: clipPitch = DEFAULT_PITCH,
     enablePooling = true,
   } = options ?? {};
-  const pooledAudioOptions = {
-    clippet,
-    enablePooling,
-  };
+  const pooledAudioOptions = useMemo(() => {
+    return {
+      clippet,
+      enablePooling,
+    };
+  }, [clippet, enablePooling]);
   const [audio, setAudio] = useState(getPooledAudio(pooledAudioOptions));
   const cappedProviderVolume = capValueWithinRange(providerVolume, minVolume, maxVolume);
   const cappedClipVolume = capValueWithinRange(clipVolume, minVolume, maxVolume);
@@ -75,7 +77,7 @@ export function useClippet(clippet: Clippet, options?: Partial<ClippetOptions>):
   useEffect(() => {
     debugClippet(clippet, '🎛 Handle clippet change');
     setAudio(getPooledAudio(pooledAudioOptions));
-  }, [clippet, setAudio]);
+  }, [clippet, setAudio, pooledAudioOptions]);
 
   // handle clip changes
   useEffect(() => {
