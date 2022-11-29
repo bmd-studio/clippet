@@ -5,7 +5,6 @@ export default function PlipButton() {
   const [count, setCount] = useState(0);
   const [playPlop] = useClippet(clPlip, {
     isMuted: false,
-    volume: 0.5,
   });
 
   return (
