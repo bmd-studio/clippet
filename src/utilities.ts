@@ -49,6 +49,7 @@ export function getPooledAudio(options: GetPooledClipOptions): HTMLAudioElement 
     return audioPool[url];
   }
 
+  // TODO: add react native support
   const audio = new Audio(clippet.url);
 
   // pool the new instance if pooling is enabled

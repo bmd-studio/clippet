@@ -7,7 +7,6 @@
     "allowJs": true,
     "pretty": true,
     "declaration": true,
-    "declarationDir": "./dist/types",
     "importHelpers": false,
     "experimentalDecorators": true,
     "noImplicitAny": true,

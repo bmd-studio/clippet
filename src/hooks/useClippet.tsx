@@ -53,6 +53,7 @@ export default function useClippet(clippet: Clippet, options?: Partial<ClippetOp
   // TODO: implement pich using the Web Audio API (HTML5 is not possible?)
   const pitch = providerPitch * clipPitch;
 
+  // TODO: put this one in use callback
   const play = () => {
     const playIcon = isMuted ? '🔇' : '🔊';
     debugClippet(clippet, `${playIcon} Executing play with volume: `, volume);
