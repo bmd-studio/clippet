@@ -10,6 +10,7 @@
     "test": "jest",
     "build": "npm-run-all clean:build build:bundle",
     "build:bundle": "rollup -c",
+    "postbuild": "rimraf dist/types",
     "publish:npm": "yarn build && yarn test && npm shrinkwrap && npm publish --access public",
     "publish:dry": "yarn publish:npm --dry-run",
     "clean": "rimraf dist/ && rimraf coverage/ && rimraf reports/ && rimraf *.log && rimraf node_modules/",
@@ -55,6 +56,7 @@
     "react-dom": "^18.2.0",
     "rimraf": "^3.0.2",
     "rollup": "^3.5.0",
+    "rollup-plugin-dts": "^5.0.0",
     "ts-jest": "^29.0.3",
     "tslib": "^2.4.1",
     "typescript": "^4.8.4"
