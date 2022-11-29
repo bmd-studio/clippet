@@ -1,5 +1,5 @@
 import { Clippet } from '../types';
-import url from '../../assets/audio/plip.ogg';
+import url from '../../assets/audio/plip.mp3';
 
 export const clPlip: Clippet = {
   name: 'plip',
