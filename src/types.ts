@@ -34,21 +34,21 @@ export interface ClippetContextOptions {
   /**
    * The global pitch level for all sounds. This pitch level is multiplied with the pitch specific settings of a hook.
    */
-  pitch: number;
+  // pitch: number;
 
   /**
-   * Global events on the document for
+   * Global events on the document to play clippets to make it easy to introduce accessibility features application-wide.
    */
-  globalEvents: ClippetGlobalEvent[];
+  windowEventListeners: ClippetWindowEventListener[];
 }
 
 /**
  * Global event definition to allow for easy
  */
-export interface ClippetGlobalEvent {
-  clippet: Clippet;
-  clippetOptions: ClippetOptions;
+export interface ClippetWindowEventListener {
   selectors: ClippetDocumentSelector[];
+  clippet: Clippet;
+  clippetOptions?: ClippetOptions;
 }
 
 /**
@@ -88,7 +88,7 @@ export interface ClippetOptions {
    * This number is multiplied with the pitch of the provider making it possible to set a global pitch
    * and adjust the relative pitch for each invidual hook.
    */
-  pitch: number;
+  // pitch: number;
 
   /**
    * Flag to identity whether the `Audio` instance should be re-used across unique `useClippet` hook instances.
