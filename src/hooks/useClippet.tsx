@@ -66,7 +66,7 @@ export function useClippet(clippet: Clippet, options?: Partial<ClippetOptions>):
     reset();
     audio.volume = volume;
     audio.play();
-  }, [audio, reset]);
+  }, [isMuted, volume, audio, reset]);
   const stop = useCallback(() => {
     debugClippet(clippet, '🛑 Executing stop');
     audio.pause();
