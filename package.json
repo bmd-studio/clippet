@@ -7,8 +7,7 @@
   "module": "./dist/index.js",
   "scripts": {
     "setup": "yarn && yarn --cwd=./examples setup",
-    "start": "npm-run-all --parallel start:build start:examples",
-    "start:build": "yarn build:bundle -w",
+    "start": "yarn build:bundle -w",
     "start:examples": "yarn --cwd=./examples start",
     "test": "jest",
     "build": "npm-run-all clean:build build:bundle",
