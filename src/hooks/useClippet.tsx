@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import {
   DEFAULT_CLIPPET_VOLUME,
@@ -53,36 +53,35 @@ export function useClippet(clippet: Clippet, options?: Partial<ClippetOptions>):
   // TODO: implement pich using the Web Audio API (HTML5 is not possible?)
   const pitch = providerPitch * clipPitch;
 
-  // TODO: put this one in use callback
-  const play = () => {
+  const reset = useCallback(() => {
+    debugClippet(clippet, '🕛 Executing reset');
+    audio.currentTime = 0;
+  }, [audio]);
+  const play = useCallback(() => {
     const playIcon = isMuted ? '🔇' : '🔊';
     debugClippet(clippet, `${playIcon} Executing play with volume: `, volume);
 
     reset();
     audio.volume = volume;
     audio.play();
-  };
-  const stop = () => {
+  }, [audio, reset]);
+  const stop = useCallback(() => {
     debugClippet(clippet, '🛑 Executing stop');
     audio.pause();
     reset();
-  }
-  const reset = () => {
-    debugClippet(clippet, '🕛 Executing reset');
-    audio.currentTime = 0;
-  };
+  }, [audio, reset]);
 
   // load the audio clip when the audio file changes
   useEffect(() => {
     debugClippet(clippet, '🎛 Handle clippet change');
     setAudio(getPooledAudio(pooledAudioOptions));
-  }, [clippet]);
+  }, [clippet, setAudio]);
 
   // handle clip changes
   useEffect(() => {
     debugClippet(clippet, '🎛 Handle clip change');
     reset();
-  }, [audio]);
+  }, [audio, reset]);
 
   return [
     play,
