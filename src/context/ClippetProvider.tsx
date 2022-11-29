@@ -29,7 +29,7 @@ export interface ClippetProviderProps {
  * @param props properties to configure the global options.
  * @returns ClippetProvider
  */
-export default function ClippetProvider(props: ClippetProviderProps) {
+export function ClippetProvider(props: ClippetProviderProps) {
   const { children, options } = props;
   const {
     isMuted = DEFAULT_MUTED,

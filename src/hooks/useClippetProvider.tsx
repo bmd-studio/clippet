@@ -7,6 +7,6 @@ import ClippetContext from '../context/ClippetContext';
  *
  * @returns ClippetContextOptions
  */
-export default function useClippetProvider() {
+export function useClippetProvider() {
   return useContext(ClippetContext);
 }
