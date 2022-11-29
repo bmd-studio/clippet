@@ -24,9 +24,9 @@ export function createClippetContext() {
     maxVolume: DEFAULT_MAX_VOLUME,
     mutedVolume: DEFAULT_MUTED_VOLUME,
 
-    pitch: DEFAULT_PITCH,
+    // pitch: DEFAULT_PITCH,
 
-    globalEvents: [],
+    windowEventListeners: [],
   });
 }
 

@@ -39,7 +39,7 @@ export function ClippetProvider(props: ClippetProviderProps) {
     maxVolume = DEFAULT_MAX_VOLUME,
     mutedVolume = DEFAULT_MUTED_VOLUME,
 
-    pitch = DEFAULT_PITCH,
+    // pitch = DEFAULT_PITCH,
   } = options ?? {};
 
   return(
@@ -51,9 +51,9 @@ export function ClippetProvider(props: ClippetProviderProps) {
       maxVolume,
       mutedVolume,
 
-      pitch,
+      // pitch,
 
-      globalEvents: [],
+      windowEventListeners: [],
     }}>
       {children}
     </ClippetContext.Provider>

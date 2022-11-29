@@ -27,13 +27,13 @@ export function useClippet(clippet: Clippet, options?: Partial<ClippetOptions>):
     minVolume,
     maxVolume,
     mutedVolume,
-    pitch: providerPitch,
+    // pitch: providerPitch,
   } = useClippetProvider();
   const {
     isMuted: clipIsMuted = DEFAULT_MUTED,
     forceUnmute = false,
     volume: clipVolume = DEFAULT_CLIPPET_VOLUME,
-    pitch: clipPitch = DEFAULT_PITCH,
+    // pitch: clipPitch = DEFAULT_PITCH,
     enablePooling = true,
   } = options ?? {};
   const pooledAudioOptions = useMemo(() => {
@@ -53,7 +53,7 @@ export function useClippet(clippet: Clippet, options?: Partial<ClippetOptions>):
   const volume = isMuted ? cappedMutedVolume : (cappedProviderVolume * cappedClipVolume);
 
   // TODO: implement pich using the Web Audio API (HTML5 is not possible?)
-  const pitch = providerPitch * clipPitch;
+  // const pitch = providerPitch * clipPitch;
 
   const reset = useCallback(() => {
     debugClippet(clippet, '🕛 Executing reset');
