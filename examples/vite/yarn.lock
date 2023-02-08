@@ -240,7 +240,7 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
-"@clippet/react@link:..":
+"@clippet/react@link:../..":
   version "0.0.0"
   uid ""
 
