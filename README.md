@@ -31,7 +31,7 @@
 </div>
 
 <h4>Basic usage</h4>
-```js
+```jsx
 import { useClippet, clPlip } from '@clippet/react';
 
 export default function Button() {
@@ -46,4 +46,3 @@ export default function Button() {
   );
 }
 ```
-
