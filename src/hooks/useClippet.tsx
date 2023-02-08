@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import {
   DEFAULT_CLIPPET_VOLUME,
   DEFAULT_MUTED,
-  DEFAULT_PITCH,
+  // DEFAULT_PITCH,
 } from '../constants';
 import { Clippet, UseClippet, ClippetOptions } from '../types';
 import { capValueWithinRange, getPooledAudio, debugClippet } from '../utilities';
@@ -42,7 +42,9 @@ export function useClippet(clippet: Clippet, options?: Partial<ClippetOptions>):
       enablePooling,
     };
   }, [clippet, enablePooling]);
-  const [audio, setAudio] = useState(getPooledAudio(pooledAudioOptions));
+
+  // initially the audio element should be `null` to support server-sided rendering!
+  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
   const cappedProviderVolume = capValueWithinRange(providerVolume, minVolume, maxVolume);
   const cappedClipVolume = capValueWithinRange(clipVolume, minVolume, maxVolume);
   const cappedMutedVolume = capValueWithinRange(mutedVolume, minVolume, maxVolume);
@@ -56,10 +58,20 @@ export function useClippet(clippet: Clippet, options?: Partial<ClippetOptions>):
   // const pitch = providerPitch * clipPitch;
 
   const reset = useCallback(() => {
+    if (!audio) {
+      debugClippet(clippet, 'Could not reset due to invalid audio');
+      return;
+    }
+
     debugClippet(clippet, '🕛 Executing reset');
     audio.currentTime = 0;
   }, [audio]);
   const play = useCallback(() => {
+    if (!audio) {
+      debugClippet(clippet, 'Could not play due to invalid audio');
+      return;
+    }
+
     const playIcon = isMuted ? '🔇' : '🔊';
     debugClippet(clippet, `${playIcon} Executing play with volume: `, volume);
 
@@ -68,6 +80,11 @@ export function useClippet(clippet: Clippet, options?: Partial<ClippetOptions>):
     audio.play();
   }, [isMuted, volume, audio, reset]);
   const stop = useCallback(() => {
+    if (!audio) {
+      debugClippet(clippet, 'Could not stop play to invalid audio');
+      return;
+    }
+
     debugClippet(clippet, '🛑 Executing stop');
     audio.pause();
     reset();
