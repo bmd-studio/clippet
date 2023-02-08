@@ -31,7 +31,7 @@
 </div>
 
 <h4>Basic usage</h4>
-```typescript
+```js
 import { useClippet, clPlip } from '@clippet/react';
 
 export default function Button() {
