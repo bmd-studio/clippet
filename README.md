@@ -8,15 +8,15 @@
     <a href="https://www.npmjs.com/package/@clippet/react">
        <img src="https://img.shields.io/npm/v/@clippet/react.svg" alt="npm package" />
     </a>
-    <a href="https://circleci.com/gh/bmd-studio/clippet-react">
+    <!-- <a href="https://circleci.com/gh/bmd-studio/clippet-react">
       <img src="https://img.shields.io/circleci/project/github/bmd-studio/clippet-react/master.svg" alt="CircleCI master" />
-    </a>
+    </a> -->
     <a href="https://www.npmjs.com/package/@clippet/react">
       <img src="https://img.shields.io/npm/dm/@clippet/react.svg" alt="npm downloads" />
     </a>
-    <a href="http://clippet.dev/examples">
+    <!-- <a href="http://clippet.dev/examples">
       <img src="https://img.shields.io/badge/demos-🚀🚀-yellow.svg" alt="demos" />
-    </a>
+    </a> -->
     <br />
     <h3>The font for sounds.</h3>
     <h4>An elegant React library for audio feedback<br/> in user interfaces</h4>
@@ -26,22 +26,22 @@
 </div>
 
 <div align="left">
-  <h3><a href="https://clippet.dev/docs">Docs</a> - how to use</h3>
-  <h3><a href="https://clippet.dev">Get pro</a> - how to upgrade</h3>
+  <!-- <h3><a href="https://clippet.dev/docs">Docs</a> - how to use</h3> -->
+  <!-- <h3><a href="https://clippet.dev">Get pro</a> - how to upgrade</h3> -->
 </div>
 
 <h4>Basic usage</h4>
 ```typescript
-import { clPlop, useClippet } from '@clippet/react';
+import { useClippet, clPlip } from '@clippet/react';
 
 export default function Button() {
-  const [playPlop] = useClippet(clPlop);
+  const [playClick] = useClippet(clPlip);
 
   return (
     <button onClick={() => {
-      playPlop();
+      playClick();
     }}>
-      Play Sound!
+      Press me!
     </button>
   );
 }
