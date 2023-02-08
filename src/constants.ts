@@ -1,7 +1,12 @@
 /**
+ * Whether package is running in development.
+ */
+export const IN_DEVELOPMENT = false;
+
+/**
  * Whether debugging for this package is enabled.
  */
-export const DEBUG_ENABLED = true;
+export const DEBUG_ENABLED = IN_DEVELOPMENT;
 
 /**
  * Whether debugging for this package is enabled.
