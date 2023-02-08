@@ -1,6 +1,6 @@
 {
   "name": "@clippet/react",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "A font for sounds. An elegant React library for audio feedback in user interfaces.",
   "type": "module",
   "main": "./dist/index.js",

@@ -30,7 +30,7 @@
   <!-- <h3><a href="https://clippet.dev">Get pro</a> - how to upgrade</h3> -->
 </div>
 
-<h4>Basic usage</h4>
+### Usage
 ```jsx
 import { useClippet, clPlip } from '@clippet/react';
 
@@ -47,5 +47,5 @@ export default function Button() {
 }
 ```
 
-<h4>Acknowledgments</h4>
+### Acknowledgments
 ```Clippet``` is developed and maintained by <a href="https://bmd.studio/">BMD Studio</a>
