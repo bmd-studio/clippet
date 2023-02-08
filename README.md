@@ -32,11 +32,10 @@
 
 <h4>Basic usage</h4>
 ```typescript
-import { useClippet } from '@clippet/react/index';
-import cPlop from '@clippet/react/clips/plop';
+import { clPlop, useClippet } from '@clippet/react';
 
-export default function PlaySoundButton() {
-  const [playPlop] = useClippet(cPlop);
+export default function Button() {
+  const [playPlop] = useClippet(clPlop);
 
   return (
     <button onClick={() => {
