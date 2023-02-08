@@ -46,3 +46,6 @@ export default function Button() {
   );
 }
 ```
+
+<h4>Acknowledgments</h4>
+```Clippet``` is developed and maintained by <a href="https://bmd.studio/">BMD Studio</a>
