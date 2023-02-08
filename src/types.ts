@@ -39,16 +39,26 @@ export interface ClippetContextOptions {
   /**
    * Global events on the document to play clippets to make it easy to introduce accessibility features application-wide.
    */
-  windowEventListeners: ClippetWindowEventListener[];
+  windowEvents: ClippetWindowEvent[];
 }
+
+export type ClippetWindowEventType = keyof WindowEventMap;
 
 /**
  * Global event definition to allow for easy
  */
-export interface ClippetWindowEventListener {
+export interface ClippetWindowEvent {
+  eventTypes: ClippetWindowEventType[];
   selectors: ClippetDocumentSelector[];
   clippet: Clippet;
   clippetOptions?: ClippetOptions;
+}
+
+/**
+ * The Clippet global event handler options.
+ */
+export interface ClippetWindowEventsOptions {
+  windowEvents: ClippetWindowEvent[];
 }
 
 /**
@@ -110,7 +120,7 @@ export interface Clippet {
 export type UseClippet = [ClippetPlay, ClippetAdvancedTuple];
 
 /**
- * API for advancec usage of the `useClippet` hook.
+ * API for advanced usage of the `useClippet` hook.
  */
 export interface ClippetAdvancedTuple {
   stop: ClippetStop;

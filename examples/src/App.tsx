@@ -13,8 +13,13 @@ function App() {
   return (
     <ClippetProvider options={{
       volume,
-      windowEventListeners: [{
-        selectors: ['button'],
+      windowEvents: [{
+        eventTypes: ['click'],
+        selectors: ['button', 'a.nav-link', 'input[type="checkbox"]'],
+        clippet: clPlip,
+      }, {
+        eventTypes: ['mouseenter'],
+        selectors: ['div'],
         clippet: clPlip,
       }]
     }}>

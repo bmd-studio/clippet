@@ -8,6 +8,7 @@ import {
   DEFAULT_PITCH,
   DEFAULT_PROVIDER_VOLUME,
 } from '../constants';
+import { useClippetWindowEvents } from '../hooks/useClippetWindowEvents';
 import { ClippetProviderOptions } from '../types';
 import ClippetContext from './ClippetContext';
 
@@ -33,14 +34,19 @@ export function ClippetProvider(props: ClippetProviderProps) {
   const { children, options } = props;
   const {
     isMuted = DEFAULT_MUTED,
-
     volume = DEFAULT_PROVIDER_VOLUME,
     minVolume = DEFAULT_MIN_VOLUME,
     maxVolume = DEFAULT_MAX_VOLUME,
     mutedVolume = DEFAULT_MUTED_VOLUME,
+    windowEvents = [],
 
     // pitch = DEFAULT_PITCH,
   } = options ?? {};
+
+  // handle any application-wide events
+  useClippetWindowEvents({
+    windowEvents,
+  });
 
   return(
     <ClippetContext.Provider value={{
@@ -53,7 +59,7 @@ export function ClippetProvider(props: ClippetProviderProps) {
 
       // pitch,
 
-      windowEventListeners: [],
+      windowEvents,
     }}>
       {children}
     </ClippetContext.Provider>

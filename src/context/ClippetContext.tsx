@@ -26,7 +26,7 @@ export function createClippetContext() {
 
     // pitch: DEFAULT_PITCH,
 
-    windowEventListeners: [],
+    windowEvents: [],
   });
 }
 
