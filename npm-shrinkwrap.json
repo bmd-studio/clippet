@@ -1,12 +1,12 @@
 {
   "name": "@clippet/react",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
       "name": "@clippet/react",
-      "version": "0.0.5",
+      "version": "0.0.6",
       "license": "MIT",
       "devDependencies": {
         "@rollup/plugin-typescript": "^10.0.1",
