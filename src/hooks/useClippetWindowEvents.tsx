@@ -14,10 +14,10 @@ export function useClippetWindowEvents(options: ClippetWindowEventsOptions) {
       const { eventTypes, selectors, clippet, clippetOptions } = windowEvent;
 
       eventTypes?.map?.((eventType) => {
-        window.addEventListener(eventType, (event) => {
-          const { target } = event;
+        // window.addEventListener(eventType, (event) => {
+        //   const { target } = event;
 
-        })
+        // })
       });
     });
 
