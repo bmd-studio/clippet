@@ -1,6 +1,6 @@
 {
   "name": "@clippet/react",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A font for sounds. An elegant React library for audio feedback in user interfaces.",
   "type": "module",
   "main": "./dist/index.js",
@@ -13,7 +13,7 @@
     "build": "npm-run-all clean:build build:bundle",
     "build:bundle": "rollup -c",
     "postbuild": "rimraf dist/types",
-    "publish:npm": "yarn build && yarn test && npm shrinkwrap && npm publish --access public",
+    "publish:npm": "yarn build && yarn test && npm publish --access public",
     "publish:dry": "yarn publish:npm --dry-run",
     "clean": "rimraf dist/ && rimraf coverage/ && rimraf reports/ && rimraf *.log && rimraf node_modules/",
     "clean:build": "rimraf dist/"
