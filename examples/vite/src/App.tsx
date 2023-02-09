@@ -2,7 +2,7 @@ import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import './App.css';
 import PlipButton from './PlipButton';
-// import { ClippetProvider, clPlip } from '@clippet/react';
+import { ClippetProvider, clPlip } from '@clippet/react';
 
 function App() {
   const [sliderVolume, setSliderVolume] = useState(50);
@@ -11,18 +11,18 @@ function App() {
   const volume = sliderVolume / maxSliderVolume;
 
   return (
-    // <ClippetProvider options={{
-    //   volume,
-    //   windowEvents: [{
-    //     eventTypes: ['click'],
-    //     selectors: ['button', 'a.nav-link', 'input[type="checkbox"]'],
-    //     clippet: clPlip,
-    //   }, {
-    //     eventTypes: ['mouseenter'],
-    //     selectors: ['div'],
-    //     clippet: clPlip,
-    //   }]
-    // }}>
+    <ClippetProvider options={{
+      volume,
+      windowEvents: [{
+        eventTypes: ['click'],
+        selectors: ['button', 'a.nav-link', 'input[type="checkbox"]'],
+        clippet: clPlip,
+      }, {
+        eventTypes: ['mouseenter'],
+        selectors: ['div'],
+        clippet: clPlip,
+      }]
+    }}>
       <div className="App">
         <div>
           <a href="https://vitejs.dev" target="_blank">
@@ -56,7 +56,7 @@ function App() {
           Click on the Vite and React logos to learn more
         </p>
       </div>
-    // </ClippetProvider>
+    </ClippetProvider>
   )
 }
 
