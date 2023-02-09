@@ -44,6 +44,8 @@ export function useClippet(clippet: Clippet, options?: Partial<ClippetOptions>):
   }, [clippet, enablePooling]);
 
   // initially the audio element should be `null` to support server-sided rendering!
+  // when initializing the Audio element directly here SSR would not work because,
+  // this element is not available. Recommended pattern is to use `useEffect` to initialize it.
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
   const cappedProviderVolume = capValueWithinRange(providerVolume, minVolume, maxVolume);
   const cappedClipVolume = capValueWithinRange(clipVolume, minVolume, maxVolume);
