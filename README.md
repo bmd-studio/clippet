@@ -18,6 +18,7 @@
       <img src="https://img.shields.io/badge/demos-🚀🚀-yellow.svg" alt="demos" />
     </a> -->
     <br />
+    <h2>⚠️ THIS PACKAGE IS STILL IN ALPHA ⚠️</h2>
     <h3>The font for sounds.</h3>
     <h4>An elegant React library for audio feedback<br/> in user interfaces</h4>
   </sup>
@@ -31,6 +32,8 @@
 </div>
 
 ### Usage
+
+#### Basic usage
 ```jsx
 import { useClippet, clPlip } from '@clippet/react';
 
@@ -46,6 +49,13 @@ export default function Button() {
   );
 }
 ```
+
+### Roadmap
+- Q2 2023: first sound font consisting between 12 and 16 sounds
+- Q2 2023: landing page for package
+- Q3 2023: in-depth documentation
+- Q3 2023: playground to test sounds with UX patterns
+- Q3 2023: release of multiple sound fonts
 
 ### Acknowledgments
 ```Clippet``` is developed and maintained by <a href="https://bmd.studio/" target="_blank">BMD Studio</a>
