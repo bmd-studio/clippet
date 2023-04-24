@@ -145,6 +145,11 @@ export interface AudioPool {
 }
 
 /**
+ * Nullable HTML5 `Audio` instance.
+ */
+export type ClippetAudio = HTMLAudioElement | null;
+
+/**
  * Options to be passed along when fetching a pooled `Audio` instance.
  */
 export interface GetPooledClipOptions {

@@ -6,14 +6,9 @@ import {
   DEFAULT_MUTED_VOLUME,
   DEFAULT_PROVIDER_VOLUME,
 } from '../constants';
-import { AudioPool, GetPooledClipOptions, ClippetProviderOptions, ClippetOptions } from '../types';
+import { AudioPool, GetPooledClipOptions, ClippetProviderOptions, ClippetOptions, ClippetAudio } from '../types';
 
 import { capValueWithinRange } from './validation';
-
-/**
- * Nullable HTML5 `Audio` instance.
- */
-type NullableAudio = HTMLAudioElement | null;
 
 /**
  * Object to pool the audio instances in.
@@ -52,7 +47,7 @@ export function getPooledAudio(options: GetPooledClipOptions) {
  *
  * @param audio The audio instance that should be reset.
  */
-export function resetAudio(audio: NullableAudio) {
+export function resetAudio(audio: ClippetAudio) {
   if (!audio) {
     return;
   }
@@ -66,7 +61,7 @@ export function resetAudio(audio: NullableAudio) {
  * @param audio The audio instance that should be set.
  * @param volume The volume that it should be set to.
  */
-export function setAudioVolume(audio: NullableAudio, volume: number) {
+export function setAudioVolume(audio: ClippetAudio, volume: number) {
   if (!audio) {
     return;
   }
@@ -80,7 +75,7 @@ export function setAudioVolume(audio: NullableAudio, volume: number) {
  * @param audio The audio instance that should be played.
  * @param volume The volume that it should be played with.
  */
-export function playAudio(audio: NullableAudio, volume: number) {
+export function playAudio(audio: ClippetAudio, volume: number) {
   setAudioVolume(audio, volume);
   audio?.play();
 }
@@ -90,7 +85,7 @@ export function playAudio(audio: NullableAudio, volume: number) {
  *
  * @param audio The audio instance that should be paused.
  */
-export function pauseAudio(audio: NullableAudio) {
+export function pauseAudio(audio: ClippetAudio) {
   audio?.pause();
 }
 
@@ -99,7 +94,7 @@ export function pauseAudio(audio: NullableAudio) {
  *
  * @param audio The audio instance that should be stopped.
  */
-export function stopAudio(audio: NullableAudio) {
+export function stopAudio(audio: ClippetAudio) {
   pauseAudio(audio);
   resetAudio(audio);
 }
