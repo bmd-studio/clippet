@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 
 import { ClippetWindowEventsOptions } from '../types';
-import { debugClippet, getAudioVolumeTuple, getPooledAudio, playAudio, resetAudio } from '../utilities';
+import { getAudioVolumeTuple, getPooledAudio, playAudio, resetAudio } from '../utilities/audio';
+import { debugClippet } from '../utilities/logging';
 
 type EventListener = (event: Event) => void;
 
