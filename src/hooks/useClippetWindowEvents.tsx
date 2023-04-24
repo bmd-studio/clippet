@@ -11,7 +11,6 @@ export function useClippetWindowEvents(options: ClippetWindowEventsOptions) {
     windowEvents = [],
     providerOptions = {},
   } = options;
-  providerOptions
 
   // set all window events reactively
   useEffect(() => {
