@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { ClippetWindowEventsOptions } from '../types';
-import { getAudioVolumeTuple, getPooledAudio } from '../utilities';
+import { getAudioVolumeTuple, getPooledAudio, playAudio, resetAudio } from '../utilities';
 
 type EventListener = (event: Event) => void;
 
@@ -41,9 +41,8 @@ export function useClippetWindowEvents(options: ClippetWindowEventsOptions) {
             // when a match is found, play the audio
             // reset the audio to the beginning to support multiple clicks in a row
             if (matches) {
-              audio.currentTime = 0;
-              audio.volume = volume;
-              audio?.play();
+              resetAudio(audio);
+              playAudio(audio, volume);
             }
           });
         }

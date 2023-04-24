@@ -11,6 +11,8 @@ import {
 } from './constants';
 import { Clippet, AudioPool, GetPooledClipOptions, ClippetProviderOptions, ClippetOptions } from './types';
 
+type NullableAudio = HTMLAudioElement | null;
+
 /**
  * Object to pool the audio instances in.
  */
@@ -63,6 +65,54 @@ export function getPooledAudio(options: GetPooledClipOptions) {
   }
 
   return audio;
+}
+
+/**
+ * Helper to reset the audio instance to the start.
+ * This is useful when the audio instance is reused.
+ *
+ * @param audio The audio instance that should be reset.
+ */
+export function resetAudio(audio: NullableAudio) {
+  if (!audio) {
+    return;
+  }
+
+  audio.currentTime = 0;
+}
+
+/**
+ * Helper to set the volume of a specific audio instance.
+ *
+ * @param audio The audio instance that should be set.
+ * @param volume The volume that it should be set to.
+ */
+export function setAudioVolume(audio: NullableAudio, volume: number) {
+  if (!audio) {
+    return;
+  }
+
+  audio.volume = volume;
+}
+
+/**
+ * Helper to play a specific audio instance.
+ *
+ * @param audio The audio instance that should be played.
+ * @param volume The volume that it should be played with.
+ */
+export function playAudio(audio: NullableAudio, volume: number) {
+  setAudioVolume(audio, volume);
+  audio?.play();
+}
+
+/**
+ * Helper to pause a specific audio instance.
+ *
+ * @param audio The audio instance that should be paused.
+ */
+export function pauseAudio(audio: NullableAudio) {
+  audio?.pause();
 }
 
 /**
