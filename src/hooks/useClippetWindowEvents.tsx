@@ -36,13 +36,15 @@ export function useClippetWindowEvents(options: ClippetWindowEventsOptions) {
             // @ts-ignore, matches is not a property of target even though it is a property of Element
             const matches = target?.matches?.(selector);
 
-            // when a match is found, play the audio
-            // reset the audio to the beginning to support multiple clicks in a row
-            if (matches) {
-              debugClippet(clippet, `${isMuted ? '🔇' : '🔊'} Playing from window event with volume: `, volume);
-              resetAudio(audio);
-              playAudio(audio, volume);
+            // guard: make sure the target matches the selector
+            if (!matches) {
+              return;
             }
+
+            // reset the audio to the beginning to support multiple clicks in a row
+            debugClippet(clippet, `${isMuted ? '🔇' : '🔊'} Playing from window event with volume: `, volume);
+            resetAudio(audio);
+            playAudio(audio, volume);
           });
         }
 
