@@ -10,6 +10,7 @@ export function useClippetWindowEvents(options: ClippetWindowEventsOptions) {
     windowEvents = [],
     providerOptions = {},
   } = options;
+  providerOptions
 
   // set all window events reactively
   useEffect(() => {
@@ -17,9 +18,10 @@ export function useClippetWindowEvents(options: ClippetWindowEventsOptions) {
 
     windowEvents?.map?.((windowEvent) => {
       const { eventTypes, selectors, clippet, options: clippetOptions } = windowEvent;
+      const { enablePooling = true } = clippetOptions ?? {};
       const { volume } = getAudioVolumeTuple(providerOptions, clippetOptions);
       const audio = getPooledAudio({
-        enablePooling: true,
+        enablePooling,
         clippet,
       });
 
