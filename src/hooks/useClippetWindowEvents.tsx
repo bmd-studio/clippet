@@ -26,15 +26,12 @@ export function useClippetWindowEvents(options: ClippetWindowEventsOptions) {
         clippet,
       });
 
-      // guard: check if the audio element is valid
-      if (!audio) {
-        return;
-      }
-
+      // add event listeners for each event type
       eventTypes?.map?.((eventType) => {
         const eventListener: EventListener = (event: Event) => {
           const { target } = event;
 
+          // add event listener for each selector
           selectors?.map((selector) => {
             // @ts-ignore, matches is not a property of target even though it is a property of Element
             const matches = target?.matches?.(selector);
@@ -49,8 +46,9 @@ export function useClippetWindowEvents(options: ClippetWindowEventsOptions) {
           });
         }
 
-        eventListeners.push(eventListener);
+        // add listener to window and push to array for cleanup later
         window.addEventListener(eventType, eventListener)
+        eventListeners.push(eventListener);
       });
     });
 
