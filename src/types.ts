@@ -51,7 +51,7 @@ export interface ClippetWindowEvent {
   eventTypes: ClippetWindowEventType[];
   selectors: ClippetDocumentSelector[];
   clippet: Clippet;
-  clippetOptions?: ClippetOptions;
+  options?: ClippetOptions;
 }
 
 /**
@@ -59,6 +59,7 @@ export interface ClippetWindowEvent {
  */
 export interface ClippetWindowEventsOptions {
   windowEvents: ClippetWindowEvent[];
+  providerOptions?: Partial<ClippetProviderOptions>;
 }
 
 /**

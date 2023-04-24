@@ -45,6 +45,7 @@ export function ClippetProvider(props: ClippetProviderProps) {
 
   // handle any application-wide events
   useClippetWindowEvents({
+    providerOptions: options,
     windowEvents,
   });
 

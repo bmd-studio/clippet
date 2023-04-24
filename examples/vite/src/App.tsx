@@ -15,10 +15,10 @@ function App() {
       volume,
       windowEvents: [{
         eventTypes: ['click'],
-        selectors: ['button', 'a.nav-link', 'input[type="checkbox"]'],
+        selectors: ['h1', 'a.nav-link', 'input[type="checkbox"]'],
         clippet: clPlip,
       }, {
-        eventTypes: ['mouseenter'],
+        eventTypes: ['click'],
         selectors: ['div'],
         clippet: clPlip,
       }]

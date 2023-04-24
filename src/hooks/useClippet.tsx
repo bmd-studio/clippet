@@ -1,12 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 
-import {
-  DEFAULT_CLIPPET_VOLUME,
-  DEFAULT_MUTED,
-  // DEFAULT_PITCH,
-} from '../constants';
 import { Clippet, UseClippet, ClippetOptions } from '../types';
-import { capValueWithinRange, getPooledAudio, debugClippet } from '../utilities';
+import { getPooledAudio, debugClippet, getAudioVolumeTuple } from '../utilities';
 
 import { useClippetProvider } from './useClippetProvider';
 
@@ -21,19 +16,8 @@ import { useClippetProvider } from './useClippetProvider';
  * @returns Tuple to play and have access to the advanced API to for example stop the sound on request.
  */
 export function useClippet(clippet: Clippet, options?: Partial<ClippetOptions>): UseClippet {
+  const providerOptions = useClippetProvider();
   const {
-    isMuted: providerIsMuted,
-    volume: providerVolume,
-    minVolume,
-    maxVolume,
-    mutedVolume,
-    // pitch: providerPitch,
-  } = useClippetProvider();
-  const {
-    isMuted: clipIsMuted = DEFAULT_MUTED,
-    forceUnmute = false,
-    volume: clipVolume = DEFAULT_CLIPPET_VOLUME,
-    // pitch: clipPitch = DEFAULT_PITCH,
     enablePooling = true,
   } = options ?? {};
   const pooledAudioOptions = useMemo(() => {
@@ -47,17 +31,7 @@ export function useClippet(clippet: Clippet, options?: Partial<ClippetOptions>):
   // when initializing the Audio element directly here SSR would not work because,
   // this element is not available. Recommended pattern is to use `useEffect` to initialize it.
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
-  const cappedProviderVolume = capValueWithinRange(providerVolume, minVolume, maxVolume);
-  const cappedClipVolume = capValueWithinRange(clipVolume, minVolume, maxVolume);
-  const cappedMutedVolume = capValueWithinRange(mutedVolume, minVolume, maxVolume);
-
-  // Merge the provider options with the clip options. Behaviour for each option can be defined here.
-  // For example some options require a multiplication operation and other options something else.
-  const isMuted = (providerIsMuted || clipIsMuted) && !forceUnmute;
-  const volume = isMuted ? cappedMutedVolume : (cappedProviderVolume * cappedClipVolume);
-
-  // TODO: implement pich using the Web Audio API (HTML5 is not possible?)
-  // const pitch = providerPitch * clipPitch;
+  const { isMuted, volume } = getAudioVolumeTuple(providerOptions, options);
 
   const reset = useCallback(() => {
     if (!audio) {
