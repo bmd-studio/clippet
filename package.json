@@ -1,6 +1,6 @@
 {
   "name": "@clippet/react",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A font for sounds. An elegant React library for audio feedback in user interfaces.",
   "type": "module",
   "main": "./dist/index.js",
@@ -8,7 +8,7 @@
   "scripts": {
     "setup": "yarn && yarn --cwd=./examples setup",
     "start": "yarn build:bundle -w",
-    "start:examples": "yarn --cwd=./examples start",
+    "start:vite": "yarn --cwd=./examples/vite start",
     "test": "jest",
     "build": "npm-run-all clean:build build:bundle",
     "build:bundle": "rollup -c",
