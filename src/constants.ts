@@ -63,7 +63,7 @@ export const DEFAULT_PITCH = 1.0;
  */
 export const DEFAULT_MIN_PITCH = 0.0;
 
- /**
-  * The default maximum pitch level.
-  */
+/**
+ * The default maximum pitch level.
+ */
 export const DEFAULT_MAX_PITCH = 10.0;
