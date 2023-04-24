@@ -116,6 +116,16 @@ export function pauseAudio(audio: NullableAudio) {
 }
 
 /**
+ * Helper to stop a specific audio instance.
+ *
+ * @param audio The audio instance that should be stopped.
+ */
+export function stopAudio(audio: NullableAudio) {
+  pauseAudio(audio);
+  resetAudio(audio);
+}
+
+/**
  * Helper to get the volume and whether it is muted of a specific clippet.
  */
 export function getAudioVolumeTuple(providerOptions: Partial<ClippetProviderOptions>, clippetOptions?: Partial<ClippetOptions>) {

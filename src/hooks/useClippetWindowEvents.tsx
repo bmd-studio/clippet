@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { ClippetWindowEventsOptions } from '../types';
-import { getAudioVolumeTuple, getPooledAudio, playAudio, resetAudio } from '../utilities';
+import { debugClippet, getAudioVolumeTuple, getPooledAudio, playAudio, resetAudio } from '../utilities';
 
 type EventListener = (event: Event) => void;
 
@@ -19,7 +19,7 @@ export function useClippetWindowEvents(options: ClippetWindowEventsOptions) {
     windowEvents?.map?.((windowEvent) => {
       const { eventTypes, selectors, clippet, options: clippetOptions } = windowEvent;
       const { enablePooling = true } = clippetOptions ?? {};
-      const { volume } = getAudioVolumeTuple(providerOptions, clippetOptions);
+      const { volume, isMuted } = getAudioVolumeTuple(providerOptions, clippetOptions);
       const audio = getPooledAudio({
         enablePooling,
         clippet,
@@ -41,6 +41,7 @@ export function useClippetWindowEvents(options: ClippetWindowEventsOptions) {
             // when a match is found, play the audio
             // reset the audio to the beginning to support multiple clicks in a row
             if (matches) {
+              debugClippet(clippet, `${isMuted ? '🔇' : '🔊'} Playing from window event with volume: `, volume);
               resetAudio(audio);
               playAudio(audio, volume);
             }

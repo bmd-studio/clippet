@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import { Clippet, UseClippet, ClippetOptions } from '../types';
-import { getPooledAudio, debugClippet, getAudioVolumeTuple, playAudio, resetAudio, pauseAudio } from '../utilities';
+import { getPooledAudio, debugClippet, getAudioVolumeTuple, playAudio, resetAudio, stopAudio } from '../utilities';
 
 import { useClippetProvider } from './useClippetProvider';
 
@@ -34,24 +34,24 @@ export function useClippet(clippet: Clippet, options?: Partial<ClippetOptions>):
   const { isMuted, volume } = getAudioVolumeTuple(providerOptions, options);
 
   const play = useCallback(() => {
-    const playIcon = isMuted ? '🔇' : '🔊';
-    debugClippet(clippet, `${playIcon} Executing play with volume: `, volume);
+    debugClippet(clippet, `${isMuted ? '🔇' : '🔊'} Playing from hook with volume: `, volume);
     resetAudio(audio);
     playAudio(audio, volume);
   }, [isMuted, volume, audio]);
   const stop = useCallback(() => {
-    debugClippet(clippet, '🛑 Executing stop');
-    pauseAudio(audio);
-    resetAudio(audio);
+    debugClippet(clippet, '🛑 Stopping...');
+    stopAudio(audio);
   }, [audio]);
 
-  // load the audio clip when the audio file changes
+  // load the audio clip when the clippet changes
   useEffect(() => {
+    const newAudio = getPooledAudio(pooledAudioOptions);
+
     debugClippet(clippet, '🎛 Handling clippet change...');
-    setAudio(getPooledAudio(pooledAudioOptions));
+    setAudio(newAudio);
   }, [clippet, setAudio, pooledAudioOptions]);
 
-  // handle clip changes
+  // handle audio clip changes
   useEffect(() => {
     debugClippet(clippet, '🎛 Handling audio clip change...');
     resetAudio(audio);
