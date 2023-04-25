@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { Clippet } from '../../../../shared';
 
-import { UseClippet, ClippetOptions } from '../types';
+import { Clippet, UseClippet, ClippetOptions } from '../types';
 import { getPooledAudio, getAudioVolumeTuple, playAudio, resetAudio, stopAudio } from '../utilities/audio';
 import { debugClippet } from '../utilities/logging';
 

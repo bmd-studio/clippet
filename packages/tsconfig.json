@@ -1,20 +1,15 @@
 {
   "compilerOptions": {
     "module": "esnext",
-    "outDir": "dist",
     "target": "esnext",
     "resolveJsonModule": true,
-    "sourceMap": true,
-    "inlineSources": true,
     "strict": true,
     "allowJs": true,
     "pretty": true,
     "declaration": true,
-    "declarationDir": "./dist/types",
     "importHelpers": false,
     "experimentalDecorators": true,
     "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true,
     "strictNullChecks": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedParameters": false,
@@ -23,16 +18,15 @@
     "moduleResolution": "node",
     "strictBindCallApply": false,
     "jsx": "react-jsx",
-    "types": ["node", "jest"]
+    "types": ["node", "jest"],
+    "paths": {
+      // "@clippet/shared": ["./shared/"],
+    },
   },
   "compileOnSave": false,
-  "assets":["**/*.ogg"],
   "exclude": [
     "node_modules",
     "dist",
     "**/__tests__/**"
   ],
-  "references": [
-    { "path": "./shared" }
-  ]
 }

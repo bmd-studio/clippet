@@ -1,4 +1,10 @@
-import { Clippet } from '../../../shared';
+/**
+ * The definition of a unique Clippet sound shared across packages.
+ */
+export interface Clippet {
+  name: string;
+  url: string;
+}
 
 /**
  * Global settings to adjust behaviour of all Clippet sounds at once using the Context API.

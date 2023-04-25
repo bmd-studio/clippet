@@ -6,7 +6,7 @@
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "scripts": {
-    "setup": "yarn && yarn --cwd=./examples setup",
+    "setup": "yarn",
     "start": "yarn build:bundle -w",
     "test": "jest",
     "build": "npm-run-all clean:build build:bundle",
@@ -50,6 +50,7 @@
     "dist"
   ],
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.0.2",
     "@rollup/plugin-typescript": "^10.0.1",
     "@rollup/plugin-url": "^8.0.1",
     "@types/jest": "^29.1.1",
@@ -62,6 +63,7 @@
     "react-dom": "^18.2.0",
     "rimraf": "^3.0.2",
     "rollup": "^3.5.0",
+    "rollup-plugin-auto-external": "^2.0.0",
     "rollup-plugin-dts": "^5.0.0",
     "ts-jest": "^29.0.3",
     "tslib": "^2.4.1",

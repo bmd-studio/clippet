@@ -1,5 +1,4 @@
-import { Clippet } from '../../../../shared';
-
+import { Clippet } from '../types';
 import {
   DEBUG_ENABLED,
   DEBUG_PREFIX,
