@@ -2,7 +2,7 @@
   "private": true,
   "description": "Mono repository for the Clippet project enabling audio feedback on the web.",
   "scripts": {
-    "setup": "yarn && yarn bootstrap && yarn build:setup",
+    "setup": "yarn install && yarn bootstrap && yarn build:setup",
     "bootstrap": "lerna bootstrap && lerna link",
     "clean": "yarn clean:packages && yarn clean:git",
     "clean:packages": "lerna run clean --parallel && lerna clean",
