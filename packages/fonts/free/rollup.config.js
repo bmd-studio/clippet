@@ -1,3 +1,3 @@
-import rollupConfig from '../../rollup.config.js';
+import rollupConfig from '../../../config/rollup.config.js';
 
 export default rollupConfig;
