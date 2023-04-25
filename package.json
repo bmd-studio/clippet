@@ -32,7 +32,8 @@
   "workspaces": [
     "packages/examples/*",
     "packages/fonts/*",
-    "packages/libraries/*"
+    "packages/libraries/*",
+    "packages/shared"
   ],
   "devDependencies": {
     "lerna": "^6.6.1"
