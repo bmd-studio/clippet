@@ -3,6 +3,7 @@
     <a href="https://clippet.dev/" target="_blank">Clippet</a>
   </h1>
   <sup>
+    <h2>⚠️ THIS REPOSITORY IS STILL IN ALPHA ⚠️</h2>
     <h3>The font for sounds.</h3>
     <h4>An elegant ecosystem for audio feedback in user interfaces</h4>
   </sup>
