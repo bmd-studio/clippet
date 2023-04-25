@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "setup": "yarn install",
+    "setup": "npm install",
     "start": "vite --port=5503",
-    "typecheck": "yarn tsc --watch",
+    "typecheck": "npm run tsc --watch",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },

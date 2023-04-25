@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "setup": "yarn install",
+    "setup": "npm install",
     "start": "next dev -p 5502",
     "start:prod": "next start",
     "build": "next build",
