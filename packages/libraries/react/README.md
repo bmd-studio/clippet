@@ -50,12 +50,5 @@ export default function Button() {
 }
 ```
 
-### Roadmap
-- Q2 2023: first sound font consisting between 12 and 16 sounds
-- Q2 2023: landing page for package
-- Q3 2023: in-depth documentation
-- Q3 2023: playground to test sounds with UX patterns
-- Q3 2023: release of multiple sound fonts
-
 ### Acknowledgments
 ```Clippet``` is developed and maintained by <a href="https://bmd.studio/" target="_blank">BMD Studio</a>
