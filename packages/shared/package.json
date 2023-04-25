@@ -1,5 +1,6 @@
 {
   "name": "@clippet/shared",
+  "version": "0.0.1",
   "private": true,
   "description": "Shared resources between packages.",
   "main": "./dist/index.js",
