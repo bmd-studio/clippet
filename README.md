@@ -9,7 +9,7 @@
 </div>
 
 ### Introduction
-This is the mono-repository for the Clippet ecosystem consisting of the various `web libraries`, `example projects` and `sound fonts`.
+This is the mono-repository for the Clippet ecosystem consisting of the various `web libraries`, `example projects` and `sound fonts`. These are all available in the `packages` listed below.
 
 ### Packages
 | Name | Path | Published | Description                  |
@@ -42,6 +42,12 @@ Everything is booted up in parallel in the same `shell`. The example projects ar
 | CRA (NOT WORKING YET) | [http://localhost:5501/](http://localhost:5501/) |
 | NextJS | [http://localhost:5502/](http://localhost:5502/) |
 | Vite | [http://localhost:5503/](http://localhost:5503/) |
+
+#### Cleaning repository
+To clean the local clone from all dependencies, builds and more run the following:
+```
+npm run clean
+```
 
 ### Publishing
 
