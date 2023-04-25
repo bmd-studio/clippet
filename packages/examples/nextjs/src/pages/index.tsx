@@ -2,7 +2,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
-import { useClippet, clPlip } from '@clippet/react';
+import { useClippet } from '@clippet/react';
+import { clPlip } from '@clippet/free-sound-font';
 
 const inter = Inter({ subsets: ['latin'] })
 

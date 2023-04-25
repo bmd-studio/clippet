@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { clPlip, useClippet } from '@clippet/react';
+import { useClippet } from '@clippet/react';
+import { clPlip } from '@clippet/free-sound-font';
 
 export default function PlipButton() {
   const [count, setCount] = useState(0);

@@ -2,7 +2,8 @@ import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import './App.css';
 import PlipButton from './PlipButton';
-import { ClippetProvider, clPlip } from '@clippet/react';
+import { ClippetProvider } from '@clippet/react';
+import { clPlip } from '@clippet/free-sound-font';
 
 function App() {
   const [sliderVolume, setSliderVolume] = useState(50);
