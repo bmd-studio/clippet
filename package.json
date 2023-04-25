@@ -1,5 +1,4 @@
 {
-  "name": "clippet",
   "private": true,
   "description": "Mono repository for the Clippet project enabling audio feedback on the web.",
   "scripts": {
