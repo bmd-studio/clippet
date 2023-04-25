@@ -11,11 +11,6 @@ export { useClippetWindowEvents } from './hooks/useClippetWindowEvents';
 export { ClippetProvider } from './context/ClippetProvider';
 
 /**
- * Published clips
- */
-export * from './clips';
-
-/**
  * Published types
  */
 export * from './types';

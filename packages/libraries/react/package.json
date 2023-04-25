@@ -1,0 +1,73 @@
+{
+  "name": "@clippet/react",
+  "version": "0.0.11",
+  "description": "A font for sounds. An elegant React library for audio feedback in user interfaces.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "scripts": {
+    "setup": "yarn && yarn --cwd=./examples setup",
+    "start": "yarn build:bundle -w",
+    "test": "jest",
+    "build": "npm-run-all clean:build build:bundle",
+    "build:bundle": "rollup -c",
+    "postbuild": "rimraf dist/types",
+    "publish:npm": "yarn build && yarn test && npm publish --access public",
+    "publish:dry": "yarn publish:npm --dry-run",
+    "clean": "rimraf dist/ && rimraf coverage/ && rimraf reports/ && rimraf *.log && rimraf node_modules/",
+    "clean:build": "rimraf dist/"
+  },
+  "keywords": [
+    "Font",
+    "Sound",
+    "Sounds",
+    "Audio",
+    "Feedback",
+    "User",
+    "Interfaces",
+    "Experience",
+    "Mood",
+    "Disabilities",
+    "Impairment",
+    "Accessibility",
+    "React"
+  ],
+  "author": "BMD Studio <hello@bmd.studio> (https://bmd.studio/)",
+  "license": "MIT",
+  "homepage": "https://github.com/bmd-studio/clippet/packages/react",
+  "bugs": {
+    "url": "https://github.com/bmd-studio/clippet/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bmd-studio/clippet.git"
+  },
+  "publishConfig": {
+    "cache": "cache/.npm",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^10.0.1",
+    "@rollup/plugin-url": "^8.0.1",
+    "@types/jest": "^29.1.1",
+    "@types/node": "^18.8.1",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "jest": "^29.1.2",
+    "npm-run-all": "^4.1.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rimraf": "^3.0.2",
+    "rollup": "^3.5.0",
+    "rollup-plugin-dts": "^5.0.0",
+    "ts-jest": "^29.0.3",
+    "tslib": "^2.4.1",
+    "typescript": "^4.8.4"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
+  }
+}

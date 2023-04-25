@@ -1,3 +1,4 @@
+import { Clippet } from '../../../shared';
 
 /**
  * Global settings to adjust behaviour of all Clippet sounds at once using the Context API.
@@ -105,14 +106,6 @@ export interface ClippetOptions {
    * Flag to identity whether the `Audio` instance should be re-used across unique `useClippet` hook instances.
    */
   enablePooling: boolean;
-}
-
-/**
- * The definition of a unique Clippet sound which the `useClippet` hook expects to specify the sound.
- */
-export interface Clippet {
-  name: string;
-  url: string;
 }
 
 /**

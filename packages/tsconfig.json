@@ -26,11 +26,13 @@
     "types": ["node", "jest"]
   },
   "compileOnSave": false,
-  "include": ["src/**/*"],
   "assets":["**/*.ogg"],
   "exclude": [
     "node_modules",
     "dist",
     "**/__tests__/**"
+  ],
+  "references": [
+    { "path": "./shared" }
   ]
 }

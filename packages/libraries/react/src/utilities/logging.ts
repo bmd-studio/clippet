@@ -1,9 +1,10 @@
+import { Clippet } from '../../../../shared';
+
 import {
   DEBUG_ENABLED,
   DEBUG_PREFIX,
   DEBUG_PREFIX_STYLE,
 } from '../constants';
-import { Clippet } from '../types';
 
 /**
  * Helper to debug the library that checks whether the debugging flag is enabled.
