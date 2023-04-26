@@ -8,8 +8,8 @@
     <a href="https://www.npmjs.com/package/@clippet/react" target="_blank">
        <img src="https://img.shields.io/npm/v/@clippet/react.svg" alt="npm package" />
     </a>
-    <!-- <a href="https://circleci.com/gh/bmd-studio/clippet-react" target="_blank">
-      <img src="https://img.shields.io/circleci/project/github/bmd-studio/clippet-react/master.svg" alt="CircleCI master" />
+    <!-- <a href="https://circleci.com/gh/bmd-studio/clippet" target="_blank">
+      <img src="https://img.shields.io/circleci/project/github/bmd-studio/clippet/master.svg" alt="CircleCI master" />
     </a> -->
     <a href="https://www.npmjs.com/package/@clippet/react" target="_blank">
       <img src="https://img.shields.io/npm/dm/@clippet/react.svg" alt="npm downloads" />
@@ -22,8 +22,8 @@
     <h3>The font for sounds.</h3>
     <h4>An elegant React library for audio feedback<br/> in user interfaces</h4>
   </sup>
-  <pre>npm i <a href="https://www.npmjs.com/package/@clippet/react" target="_blank">@clippet/react</a></pre>
-  <pre>yarn add <a href="https://www.npmjs.com/package/@clippet/react" target="_blank">@clippet/react</a></pre>
+  <pre>npm i <a href="https://www.npmjs.com/package/@clippet/react" target="_blank">@clippet/react</a> <a href="https://www.npmjs.com/package/@clippet/free-sound-font" target="_blank">@clippet/free-sound-font</a></pre>
+  <pre>yarn add <a href="https://www.npmjs.com/package/@clippet/react" target="_blank">@clippet/react</a> <a href="https://www.npmjs.com/package/@clippet/free-sound-font" target="_blank">@clippet/free-sound-font</a></pre>
 </div>
 
 <div align="left">
@@ -35,7 +35,8 @@
 
 #### Basic usage
 ```jsx
-import { useClippet, clPlip } from '@clippet/react';
+import { useClippet } from '@clippet/react';
+import { clPlip } from '@clippet/free-sound-font';
 
 export default function Button() {
   const [playClick] = useClippet(clPlip);
