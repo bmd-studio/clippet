@@ -6,14 +6,14 @@
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "scripts": {
-    "setup": "yarn",
-    "start": "yarn build:bundle -w",
+    "setup": "npm install",
+    "start": "npm run build:bundle -- -w",
     "test": "jest",
     "build": "npm-run-all clean:build build:bundle",
     "build:bundle": "rollup -c",
     "postbuild": "rimraf dist/types",
-    "publish:npm": "yarn build && yarn test && npm publish --access public",
-    "publish:dry": "yarn publish:npm --dry-run",
+    "publish:npm": "npm run build && npm run test && npm publish --access public",
+    "publish:dry": "npm run publish:npm --dry-run",
     "clean": "rimraf dist/ && rimraf coverage/ && rimraf reports/ && rimraf *.log && rimraf node_modules/",
     "clean:build": "rimraf dist/"
   },

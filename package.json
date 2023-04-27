@@ -2,20 +2,20 @@
   "private": true,
   "description": "Mono repository for the Clippet project enabling audio feedback on the web.",
   "scripts": {
-    "setup": "yarn && yarn bootstrap && yarn build:setup",
+    "setup": "npm install && npm run bootstrap && npm run build:setup",
     "bootstrap": "lerna bootstrap && lerna link",
-    "clean": "yarn clean:packages && yarn clean:git",
+    "clean": "npm run clean:packages && npm run clean:git",
     "clean:packages": "lerna run clean --parallel && lerna clean",
     "clean:git": "git clean -fXd",
     "test": "lerna run test --parallel --stream",
     "start": "lerna run start --parallel --stream",
     "build": "lerna run build --parallel --stream",
     "build:setup": "lerna run build --stream",
-    "build:clean": "lerna run clean --parallel && yarn setup",
+    "build:clean": "lerna run clean --parallel && npm run setup",
     "build:watch": "lerna run build:watch --parallel --stream",
-    "publish:prepare": "lerna run clean:build --stream && yarn setup",
-    "publish:npm": "yarn publish:prepare && lerna run publish:npm --parallel --stream",
-    "publish:dry": "yarn publish:prepare && lerna run publish:dry --parallel --stream"
+    "publish:prepare": "lerna run clean:build --stream && npm run setup",
+    "publish:npm": "npm run publish:prepare && lerna run publish:npm --parallel --stream",
+    "publish:dry": "npm run publish:prepare && lerna run publish:dry --parallel --stream"
   },
   "repository": {
     "type": "git",
