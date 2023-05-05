@@ -51,7 +51,7 @@ export const DEFAULT_MAX_VOLUME = 1.0;
 /**
  * The default volume level while muted.
  */
- export const DEFAULT_MUTED_VOLUME = 0.0;
+export const DEFAULT_MUTED_VOLUME = 0.0;
 
 /**
  * The default pitch level.
@@ -67,3 +67,18 @@ export const DEFAULT_MIN_PITCH = 0.0;
  * The default maximum pitch level.
  */
 export const DEFAULT_MAX_PITCH = 10.0;
+
+/**
+ * The default options for the MutationObserver passed from `useClippetObserver`.
+ */
+export const DEFAULT_MUTATION_OBSERVER_OPTIONS: MutationObserverInit = {
+  attributes: true,
+  childList: false,
+  subtree: false,
+  attributeFilter: ['style'],
+};
+
+/**
+ * The default time required between mutations to trigger a callback.
+ */
+export const DEFAULT_MUTATION_OBSERVER_DEBOUNCE_MS = 100;

@@ -102,16 +102,17 @@ export interface ClippetOptions {
   volume: number;
 
   /**
-   * A normalized number (between 0 and 1) to adjust the pitch of the sound of this hook.
-   * This number is multiplied with the pitch of the provider making it possible to set a global pitch
-   * and adjust the relative pitch for each invidual hook.
-   */
-  // pitch: number;
-
-  /**
    * Flag to identity whether the `Audio` instance should be re-used across unique `useClippet` hook instances.
    */
   enablePooling: boolean;
+}
+
+/**
+ * Optional options that can be passed to a `useClippetObserver` hook to fine-tune the behaviour.
+ */
+export interface ClippetObserverOptions extends ClippetOptions {
+  mutationObserverOptions?: MutationObserverInit;
+  syncWithAnimation?: boolean;
 }
 
 /**
