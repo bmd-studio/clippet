@@ -35,6 +35,6 @@
     "packages/shared"
   ],
   "devDependencies": {
-    "lerna": "^6.6.1"
+    "lerna": "6.6.1"
   }
 }
