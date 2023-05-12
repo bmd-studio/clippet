@@ -135,10 +135,9 @@ export function useClippetObserver<T extends HTMLElement | null>(ref: RefObject<
         return;
       }
 
-      const hasMovedEnough = (
-        Math.abs(boundingBox.x - lastBoundingBox.x) >= threshold ||
-        Math.abs(boundingBox.y - lastBoundingBox.y) >= threshold
-      );
+      const deltaX = Math.abs(boundingBox.x - lastBoundingBox.x);
+      const deltaY = Math.abs(boundingBox.y - lastBoundingBox.y);
+      const hasMovedEnough = (deltaX > threshold || deltaY > threshold);
 
       // guard: skip when not moved enough
       if (!hasMovedEnough) {

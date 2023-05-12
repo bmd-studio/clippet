@@ -97,4 +97,4 @@ export const DEFAULT_SYNCRONISATION_OBSERVER_STOP_TIMEOUT_MS = 200;
 /**
  * The default amount of movement in pixels required to trigger a sound.
  */
-export const DEFAULT_MOVEMENT_OBSERVER_THRESHOLD_PX = 1;
+export const DEFAULT_MOVEMENT_OBSERVER_THRESHOLD_PX = 0.01;
