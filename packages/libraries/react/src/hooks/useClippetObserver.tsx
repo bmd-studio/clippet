@@ -1,62 +1,88 @@
-import { useState, useEffect, useCallback, RefObject, useMemo } from 'react';
+import { useState, useEffect, useCallback, RefObject } from 'react';
 
 import { Clippet, ClippetObserverOptions } from '../types';
 import { debugClippet } from '../utilities/logging';
-import { DEFAULT_MUTATION_OBSERVER_DEBOUNCE_MS, DEFAULT_MUTATION_OBSERVER_OPTIONS } from '../constants';
+import {
+  DEFAULT_MOVEMENT_OBSERVER_FRAME_RATE,
+  DEFAULT_MOVEMENT_OBSERVER_THRESHOLD_PX,
+  DEFAULT_MUTATION_OBSERVER_DEBOUNCE_MS as DEFAULT_OBSERVATION_DEBOUNCE_MS,
+  DEFAULT_SYNCHRONISATION_OBSERVER_FRAME_RATE,
+  DEFAULT_SYNCRONISATION_OBSERVER_STOP_TIMEOUT_MS,
+} from '../constants';
+import { getTimeoutMsByFrameRate, timeHasPassed } from '../utilities/timing';
 
 import { useClippet } from './useClippet';
-import { timeHasPassed } from '../utilities/timing';
 
-export function useClippetObserver<T extends HTMLElement | null>(ref: RefObject<T>, clippet: Clippet, options?: Partial<ClippetObserverOptions>) {
+export function useClippetObserver<T extends HTMLElement | null>(ref: RefObject<T>, clippet: Clippet, options?: ClippetObserverOptions) {
   const {
-    mutationObserverOptions = DEFAULT_MUTATION_OBSERVER_OPTIONS,
-    syncWithAnimation = false,
+    mutations,
+    movements,
+    synchronisation,
+    debounceMs = DEFAULT_OBSERVATION_DEBOUNCE_MS,
   } = options ?? {};
   const [playSound, { stop: stopSound }] = useClippet(clippet, options);
-  const [lastMutatedAt, setLastMutatedAt] = useState<Date | null>(null);
+  const [lastChangedAt, setLastChangedAt] = useState<Date | null>(null);
   const [lastPlayedAt, setLastPlayedAt] = useState<Date | null>(null);
   const [observer, setObserver] = useState<MutationObserver | null>(null);
-  const mutationCallback = useCallback((_mutationsList: MutationRecord[]) => {
-    const now = new Date();
-    const canTrigger = timeHasPassed(lastPlayedAt, DEFAULT_MUTATION_OBSERVER_DEBOUNCE_MS);
+  const [lastBoundingBox, setLastBoundingBox] = useState<DOMRect | null>(null);
+  const hasMutationsObserver = !!mutations;
+  const hasMovementsObserver = !!movements?.enabled;
+  const hasSynchronisation = !!synchronisation?.enabled;
 
-    // always track when the last mutation took place
-    setLastMutatedAt(now);
+  // handler that can be triggered when a change is observed which can be observed
+  // by both the mutation observer and the bounding box observer
+  const onChange = useCallback(() => {
+    const now = new Date();
+    const canTrigger = timeHasPassed(lastPlayedAt, debounceMs);
+
+    // always track when the last change took place
+    setLastChangedAt(now);
 
     // guard: skip playing of the sound if recently triggered
     if (!canTrigger) {
       return;
     }
 
-    debugClippet(clippet, '👀 Handling observed mutation...');
+    debugClippet(clippet, '👀 Handling observed change to play sound...');
     setLastPlayedAt(now);
     playSound();
-  }, [playSound, lastPlayedAt, setLastPlayedAt, setLastMutatedAt]);
+  }, [playSound, lastPlayedAt, setLastPlayedAt, setLastChangedAt, debounceMs]);
 
-  // stop the sound when the mutations are done
+  // stop the sound when the observed changes are timed out
+  // this is only active when a sync with animation is enabled
   useEffect(() => {
-    if (!syncWithAnimation || !lastPlayedAt || !lastMutatedAt) {
+    if (!hasSynchronisation || !lastPlayedAt || !lastChangedAt) {
       return;
     }
 
+    const {
+      stopTimeoutMs = DEFAULT_SYNCRONISATION_OBSERVER_STOP_TIMEOUT_MS,
+      frameRate = DEFAULT_SYNCHRONISATION_OBSERVER_FRAME_RATE,
+    } = synchronisation;
+    const intervalMs = getTimeoutMsByFrameRate(frameRate);
     const interval = setInterval(() => {
-      const shouldStopSound = timeHasPassed(lastMutatedAt, 100);
+      const shouldStopSound = timeHasPassed(lastChangedAt, stopTimeoutMs);
 
       if (shouldStopSound) {
-        debugClippet(clippet, '✋ Stopping sound because mutations seems to be done...');
+        debugClippet(clippet, '✋ Stopping sound because changes seems to be done...');
         stopSound();
         setLastPlayedAt(null);
       }
-    }, 10);
+    }, intervalMs);
 
     return () => {
       clearInterval(interval);
     };
-  }, [syncWithAnimation, lastPlayedAt, lastMutatedAt, stopSound, setLastPlayedAt]);
+  }, [hasSynchronisation, lastPlayedAt, lastChangedAt, stopSound, setLastPlayedAt]);
 
-  // initialize the observer instance
+  // initialize the mutation observer instance
   useEffect(() => {
-    const newObserver = new MutationObserver(mutationCallback);
+
+    if (!hasMutationsObserver) {
+      return;
+    }
+
+    const newObserver = new MutationObserver(onChange);
     setObserver(newObserver);
 
     // cleanup the new observer
@@ -65,16 +91,60 @@ export function useClippetObserver<T extends HTMLElement | null>(ref: RefObject<
         newObserver.disconnect();
       }
     };
-  }, [options, setObserver, mutationCallback]);
+  }, [hasMutationsObserver, setObserver, onChange]);
 
   // change the element to observe
   useEffect(() => {
 
     // guard: make sure the observer is available and the target element is available
-    if (!observer || !ref || !ref.current) {
+    if (!observer || !ref?.current) {
       return;
     }
 
-    observer.observe(ref.current, mutationObserverOptions);
-  }, [observer, ref?.current, options]);
+    observer.observe(ref.current, mutations);
+  }, [observer, ref?.current, mutations]);
+
+  // observe bounding box movements
+  useEffect(() => {
+    if (!hasMovementsObserver || !ref?.current) {
+      return;
+    }
+
+    const {
+      frameRate = DEFAULT_MOVEMENT_OBSERVER_FRAME_RATE,
+      threshold = DEFAULT_MOVEMENT_OBSERVER_THRESHOLD_PX,
+    } = movements;
+    const intervalMs = getTimeoutMsByFrameRate(frameRate);
+    const interval = setInterval(() => {
+      const boundingBox = ref?.current?.getBoundingClientRect();
+
+      // guard: skip if the bounding box is not available
+      if (!boundingBox) {
+        return;
+      }
+
+      // guard: the initial render should not trigger something
+      if (!lastBoundingBox) {
+        setLastBoundingBox(boundingBox);
+        return;
+      }
+
+      const hasMovedEnough = (
+        Math.abs(boundingBox.x - lastBoundingBox.x) >= threshold ||
+        Math.abs(boundingBox.y - lastBoundingBox.y) >= threshold
+      );
+
+      // guard: skip when not moved enough
+      if (!hasMovedEnough) {
+        return;
+      }
+
+      onChange();
+      setLastBoundingBox(boundingBox);
+    }, intervalMs);
+
+    return () => {
+      clearInterval(interval);
+    }
+  }, [hasMovementsObserver, movements, lastBoundingBox, onChange]);
 }
