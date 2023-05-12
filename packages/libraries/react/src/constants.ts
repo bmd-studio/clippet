@@ -75,6 +75,7 @@ export const DEFAULT_MAX_PITCH = 10.0;
 
 /**
  * The default time required between mutations to trigger the handler.
+ * Please note that this debounce time should be smaller than the stop timeout when synchronising changes.
  */
 export const DEFAULT_MUTATION_OBSERVER_DEBOUNCE_MS = 100;
 
@@ -91,9 +92,9 @@ export const DEFAULT_SYNCHRONISATION_OBSERVER_FRAME_RATE = 10;
 /**
  * The default time it takes after the last change before the sound should be stopped when synchronisation is enabled.
  */
-export const DEFAULT_SYNCRONISATION_OBSERVER_STOP_TIMEOUT_MS = 100;
+export const DEFAULT_SYNCRONISATION_OBSERVER_STOP_TIMEOUT_MS = 200;
 
 /**
  * The default amount of movement in pixels required to trigger a sound.
  */
-export const DEFAULT_MOVEMENT_OBSERVER_THRESHOLD_PX = 2;
+export const DEFAULT_MOVEMENT_OBSERVER_THRESHOLD_PX = 1;

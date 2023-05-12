@@ -154,6 +154,10 @@ export interface SynchronisationObserverOptions {
    */
   enabled?: boolean;
   /**
+   * Flag to identity whether the sound can be interrupted when a change is observed while the debounce delay has passed.
+   */
+  interrupt?: boolean;
+  /**
    * The amount of time in milliseconds before a sound is stopped when any changes stop.
    */
   stopTimeoutMs?: number;
@@ -173,6 +177,7 @@ export type UseClippet = [ClippetPlay, ClippetAdvancedTuple];
  */
 export interface ClippetAdvancedTuple {
   stop: ClippetStop;
+  audio: HTMLAudioElement | null;
 };
 
 /**

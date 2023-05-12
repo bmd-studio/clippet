@@ -62,6 +62,7 @@ export function useClippet(clippet: Clippet, options?: ClippetOptions): UseClipp
     play,
     {
       stop,
+      audio,
     },
   ];
 }

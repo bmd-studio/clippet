@@ -20,7 +20,7 @@ export function useClippetObserver<T extends HTMLElement | null>(ref: RefObject<
     synchronisation,
     debounceMs = DEFAULT_OBSERVATION_DEBOUNCE_MS,
   } = options ?? {};
-  const [playSound, { stop: stopSound }] = useClippet(clippet, options);
+  const [playSound, { stop: stopSound, audio }] = useClippet(clippet, options);
   const [lastChangedAt, setLastChangedAt] = useState<Date | null>(null);
   const [lastPlayedAt, setLastPlayedAt] = useState<Date | null>(null);
   const [observer, setObserver] = useState<MutationObserver | null>(null);
@@ -33,7 +33,10 @@ export function useClippetObserver<T extends HTMLElement | null>(ref: RefObject<
   // by both the mutation observer and the bounding box observer
   const onChange = useCallback(() => {
     const now = new Date();
-    const canTrigger = timeHasPassed(lastPlayedAt, debounceMs);
+    const isPlaying = !audio?.ended && (audio?.currentTime ?? 0) > 0;
+    const enoughTimeHasPassed = timeHasPassed(lastPlayedAt, debounceMs);
+    const synchronisationMayInterrupt = (synchronisation?.interrupt || !isPlaying);
+    const canTrigger = (enoughTimeHasPassed && synchronisationMayInterrupt);
 
     // always track when the last change took place
     setLastChangedAt(now);
@@ -63,17 +66,20 @@ export function useClippetObserver<T extends HTMLElement | null>(ref: RefObject<
     const interval = setInterval(() => {
       const shouldStopSound = timeHasPassed(lastChangedAt, stopTimeoutMs);
 
-      if (shouldStopSound) {
-        debugClippet(clippet, '✋ Stopping sound because changes seems to be done...');
-        stopSound();
-        setLastPlayedAt(null);
+      // guard: skip when stop is not needed
+      if (!shouldStopSound) {
+        return;
       }
+
+      debugClippet(clippet, '✋ Stopping sound because changes seems to be done...');
+      stopSound();
+      setLastPlayedAt(null);
     }, intervalMs);
 
     return () => {
       clearInterval(interval);
     };
-  }, [hasSynchronisation, lastPlayedAt, lastChangedAt, stopSound, setLastPlayedAt]);
+  }, [hasSynchronisation, synchronisation, lastPlayedAt, lastChangedAt, stopSound, setLastPlayedAt]);
 
   // initialize the mutation observer instance
   useEffect(() => {
