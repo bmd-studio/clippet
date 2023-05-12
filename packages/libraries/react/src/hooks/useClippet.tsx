@@ -16,7 +16,7 @@ import { useClippetProvider } from './useClippetProvider';
  * @param options Advanced options to customize the behaviour of this single hook.
  * @returns Tuple to play and have access to the advanced API to for example stop the sound on request.
  */
-export function useClippet(clippet: Clippet, options?: Partial<ClippetOptions>): UseClippet {
+export function useClippet(clippet: Clippet, options?: ClippetOptions): UseClippet {
   const providerOptions = useClippetProvider();
   const {
     enablePooling = true,

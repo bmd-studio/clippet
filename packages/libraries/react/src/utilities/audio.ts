@@ -102,7 +102,7 @@ export function stopAudio(audio: ClippetAudio) {
 /**
  * Helper to get the volume and whether it is muted of a specific clippet.
  */
-export function getAudioVolumeTuple(providerOptions: Partial<ClippetProviderOptions>, clippetOptions?: Partial<ClippetOptions>) {
+export function getAudioVolumeTuple(providerOptions: ClippetProviderOptions, clippetOptions?: ClippetOptions) {
   const {
     isMuted: providerIsMuted,
     volume: providerVolume = DEFAULT_PROVIDER_VOLUME,

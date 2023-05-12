@@ -1,3 +1,5 @@
+import { ONE_SECOND_MS } from '../constants';
+
 export function throttle(callback: Function, delay: number) {
   let shouldWait = false
 
@@ -37,4 +39,14 @@ export function timeHasPassed(date: Date | null | undefined, ms: number) {
   const diff = now.getTime() - date.getTime();
 
   return diff > ms;
+}
+
+export function getTimeoutMsByFrameRate(frameRate: number) {
+
+  // guard: skip invalid frame rates
+  if (frameRate === 0) {
+    return 0;
+  }
+
+  return ONE_SECOND_MS / Math.abs(frameRate);
 }

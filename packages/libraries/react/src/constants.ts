@@ -9,6 +9,11 @@ export const IN_DEVELOPMENT = false;
 export const DEBUG_ENABLED = IN_DEVELOPMENT;
 
 /**
+ * One second in milliseconds.
+ */
+export const ONE_SECOND_MS = 1000;
+
+/**
  * Whether debugging for this package is enabled.
  */
 export const DEBUG_PREFIX = `[CLIPPET]`;
@@ -69,16 +74,26 @@ export const DEFAULT_MIN_PITCH = 0.0;
 export const DEFAULT_MAX_PITCH = 10.0;
 
 /**
- * The default options for the MutationObserver passed from `useClippetObserver`.
- */
-export const DEFAULT_MUTATION_OBSERVER_OPTIONS: MutationObserverInit = {
-  attributes: true,
-  childList: false,
-  subtree: false,
-  attributeFilter: ['style'],
-};
-
-/**
- * The default time required between mutations to trigger a callback.
+ * The default time required between mutations to trigger the handler.
  */
 export const DEFAULT_MUTATION_OBSERVER_DEBOUNCE_MS = 100;
+
+/**
+ * The default frame rate per second where the movement should be checked.
+ */
+export const DEFAULT_MOVEMENT_OBSERVER_FRAME_RATE = 10;
+
+/**
+ * The default frame rate per second where the synchronisation should be checked.
+ */
+export const DEFAULT_SYNCHRONISATION_OBSERVER_FRAME_RATE = 10;
+
+/**
+ * The default time it takes after the last change before the sound should be stopped when synchronisation is enabled.
+ */
+export const DEFAULT_SYNCRONISATION_OBSERVER_STOP_TIMEOUT_MS = 100;
+
+/**
+ * The default amount of movement in pixels required to trigger a sound.
+ */
+export const DEFAULT_MOVEMENT_OBSERVER_THRESHOLD_PX = 2;

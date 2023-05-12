@@ -17,7 +17,7 @@ import ClippetContext from './ClippetContext';
  */
 export interface ClippetProviderProps {
   children?: ReactNode | ReactNode[] | null;
-  options?: Partial<ClippetProviderOptions>;
+  options?: ClippetProviderOptions;
 }
 
 /**
