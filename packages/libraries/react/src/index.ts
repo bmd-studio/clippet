@@ -14,4 +14,21 @@ export { ClippetProvider } from './context/ClippetProvider';
 /**
  * Published types
  */
-export * from './types';
+export {
+
+  // `useClippet` hook
+  UseClippet,
+  ClippetOptions,
+  Clippet,
+
+  // `useClippetObserver` hook
+  ClippetObserverOptions,
+
+  // provider
+  ClippetProviderOptions,
+  ClippetContextOptions,
+
+  // window events
+  ClippetWindowEventsOptions,
+  ClippetWindowEventType,
+} from './types';
