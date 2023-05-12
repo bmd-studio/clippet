@@ -16,6 +16,7 @@ module.exports = [{
   plugins: [
     typescript(),
     url({
+      limit: Infinity, // required to prevent a maximum amount of files to not be bundled
       include: ['**/*.ogg', '**/*.mp3', '**/*.aac'],
     }),
   ],
